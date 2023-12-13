@@ -12,25 +12,30 @@ const Statistics = (props) => {
   }
   
   return (
-    <div>
-      <StatisticLine text="good" value={() => good} />
-      <StatisticLine text="neutral" value={() => neutral} />
-      <StatisticLine text="bad" value={() => bad} />
-      <StatisticLine text="all" value={() => total} />
-      <StatisticLine 
-        text="average" 
-        value={() => (good - bad) / total}
-      />
-      <StatisticLine
-        text="positive"
-        value={() => `${(good / total) * 100} %`}
-      />
-    </div>
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={() => good} />
+        <StatisticLine text="neutral" value={() => neutral} />
+        <StatisticLine text="bad" value={() => bad} />
+        <StatisticLine text="all" value={() => total} />
+        <StatisticLine 
+          text="average" 
+          value={() => (good - bad) / total}
+        />
+        <StatisticLine
+          text="positive"
+          value={() => `${(good / total) * 100} %`}
+        />
+      </tbody>
+    </table>
   )
 }
 
 const StatisticLine = ({ text, value }) =>
-  <div>{text} {value()}</div>
+  <tr>
+    <td>{text}</td>
+    <td>{value()}</td>
+  </tr>
 
 const App = () => {
   const [good, setGood] = useState(0)
