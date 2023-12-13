@@ -20,11 +20,11 @@ const Statistics = (props) => {
         <StatisticLine text="all" value={() => total} />
         <StatisticLine 
           text="average" 
-          value={() => (good - bad) / total}
+          value={() => Math.round(((good - bad) / total) * 10) / 10}
         />
         <StatisticLine
           text="positive"
-          value={() => `${(good / total) * 100} %`}
+          value={() => `${Math.round(((good / total) * 100) * 10) / 10} %`}
         />
       </tbody>
     </table>
