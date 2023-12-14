@@ -1,15 +1,28 @@
 import { useState } from "react"
 
-const MostVotes = ({ anecdotes, votes }) => {
+const MostVotedAnecdote = ({ anecdotes, votes }) => {
   const max = [...votes].indexOf(Math.max(...votes))
-
-  console.log(votes)
-  console.log(max)
 
   return (
     <div>
       <h1>Anecdote with most votes</h1>
       <p>{anecdotes[max]}</p>
+    </div>
+  )
+}
+
+const AnecdoteOfTheDay = (props) => {
+  const { selected, anecdotes, votes, nextAnecdoteHandler, voteHandler } = props
+  
+  return (
+    <div>
+      <h1>Anecdote of the day</h1>
+      <div>{anecdotes[selected]}</div>
+      <div>has {votes[selected]} votes</div>
+      <div>
+          <button onClick={voteHandler}>vote</button>
+          <button onClick={nextAnecdoteHandler}>next anecdote</button>
+        </div>
     </div>
   )
 }
@@ -44,13 +57,14 @@ const App = () => {
 
   return (
     <div>
-      {anecdotes[selected]}
-      <div>has {votes[selected]} votes</div>
-      <div>
-        <button onClick={setVotesHandler}>vote</button>
-        <button onClick={setRandomAnecdotesHandler}>next anecdote</button>
-      </div>
-      <MostVotes anecdotes={anecdotes} votes={votes}/>
+      <AnecdoteOfTheDay 
+        selected={selected}
+        anecdotes={anecdotes}
+        votes={votes}
+        nextAnecdoteHandler={setRandomAnecdotesHandler}
+        voteHandler={setVotesHandler}
+      />
+      <MostVotedAnecdote anecdotes={anecdotes} votes={votes}/>
     </div>
   )
 }
